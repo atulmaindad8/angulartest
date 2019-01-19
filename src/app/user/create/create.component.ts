@@ -14,6 +14,8 @@ export class CreateComponent implements OnInit {
   cities = ['Mumbai', 'Pune', 'Thane'];
   skills = ['C#', '.net', 'Angularjs', 'Reactjs'];
   userSelectedSkills = [];
+  fileToUpload: File = null;
+  formData = new FormData();
   constructor(private router: Router, private route: ActivatedRoute, private apiservice: ApiService) {
     this.user = new User;
   }
@@ -26,9 +28,21 @@ export class CreateComponent implements OnInit {
     console.log("Form Submitted!", this.user);
     this.user.skills = this.userSelectedSkills.toString();
     this.user.pictureUrl = "";
-    this.apiservice.addUser(this.user);
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
-    this.apiservice.addUser(this.user)
+    if (this.user.name == "" || this.user.name == undefined) 
+    {
+        alert('Please enter name');
+        return false;
+    }
+   else if (reg.test(this.user.email) == false) 
+    {
+        alert('Invalid Email Address');
+        return false;
+    }
+
+    
+    this.apiservice.addUser(this.user,this.formData)
       .subscribe(res => {
        if(res.error){
          alert("Email already exist");
@@ -42,7 +56,7 @@ export class CreateComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/users']);
   }
   checkboxClick(ev) {
     console.log(ev.target.value);
@@ -56,5 +70,11 @@ export class CreateComponent implements OnInit {
     }
     console.log(this.userSelectedSkills);
   }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    this.formData.append('file', this.fileToUpload, this.fileToUpload.name)
+    console.log(this.fileToUpload)
+}
 
 }

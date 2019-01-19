@@ -3,6 +3,7 @@
   <table class="table table-striped">
     <thead>
     <tr>
+      <th>Photo</th>
       <th>Name</th>
       <th>Surname</th>
       <th>Email</th>
@@ -12,13 +13,14 @@
     </thead>
     <tbody>
     <tr *ngFor="let user of users">
+        <td><img class="profile_pic"  [src]="user.pictureUrl!= null ? user.pictureUrl : defaultPicUrl"></td>
       <td>{{user.name}}</td>
       <td>{{user.surname}}</td>
       <td>{{user.email}}</td>
       <td>{{user.skills}}</td>
       <td>
-        <button class="btn btn-primary" (click)="editUser(user)" > Edit</button>
-        <button class="btn btn-default" (click)="viewUser(user)" style="margin-left: 20px;">View</button>
+        <button class="btn btn-primary"  > Edit</button>
+        <button class="btn btn-default"  style="margin-left: 20px;">View</button>
         <button class="btn btn-danger" (click)="deleteUser(user._id)" style="margin-left: 20px;"> Delete</button>
       </td>
     </tr>

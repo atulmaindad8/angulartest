@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var User = require('../server/models/User');
+var fs = require('fs'); 
+var multer = require("multer");
 
 router.get('/', function(req, res, next) {
   console.log('in route')
@@ -16,12 +18,17 @@ router.post('/add', function(req, res, next) {
   User.find({ email: req.body.email }, function (err, user) {
     if (err) return next(err);
     
-    if(user){
+    if(user && user.length>0){
       res.json({error:true});
     }
     else{
       User.create(req.body, function (err, user) {
         if (err) return next(err);
+        var dir = '../src/assets/'+req.body.email;
+          if (!fs.existsSync(dir)){
+              fs.mkdirSync(dir);
+          }
+         
         res.json(user);
       });
     }
@@ -38,5 +45,7 @@ router.delete('/:id', function(req, res, next) {
     res.json(post);
   });
 });
+
+
 
 module.exports = router;

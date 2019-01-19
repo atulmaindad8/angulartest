@@ -8,10 +8,11 @@ import { CreateComponent } from './user/create/create.component';
 import { EditComponent } from './user/edit/edit.component';
 import { IndexComponent } from './user/index/index.component';
 import { RouterModule, Routes } from '@angular/router';
+import { DetailComponent } from './user/detail/detail.component';
 
 const routes: Routes = [
   {
-    path: 'create',
+    path: 'user/add',
     component: CreateComponent
   },
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: '',
     component: IndexComponent
+  },
+  {
+    path: 'users',
+    component: IndexComponent
   }
 ];
 
@@ -29,7 +34,8 @@ const routes: Routes = [
     AppComponent,
     CreateComponent,
     EditComponent,
-    IndexComponent
+    IndexComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

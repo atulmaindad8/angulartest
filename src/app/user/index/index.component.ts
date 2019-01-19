@@ -10,9 +10,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class IndexComponent implements OnInit {
   users: User[];
+  defaultPicUrl:string;
   constructor(private router: Router, private route: ActivatedRoute,private apiservice: ApiService) { }
 
   ngOnInit() {
+    this.defaultPicUrl = "assets/default.png";
     this.apiservice
     .getUsers()
     .subscribe((data: User[]) => {
@@ -22,7 +24,7 @@ export class IndexComponent implements OnInit {
   });
   }
   addUser(){
-    this.router.navigate(['/create']);
+    this.router.navigate(['/user/add']);
   }
   deleteUser(id){
     this.apiservice.deleteUser(id)

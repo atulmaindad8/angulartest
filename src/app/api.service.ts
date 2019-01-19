@@ -41,7 +41,11 @@ export class ApiService {
   //       .subscribe(res => console.log('Done'));
   // }
 
-  addUser(user): Observable<any> {
+  addUser(user,formData): Observable<any> {
+    if(formData){
+      user.formData = formData;
+      user.profileUrl = 'userPic.png'
+    }
     return this.http.post(`${apiUrl}/add`, user)
       .pipe(
         catchError(this.handleError)
