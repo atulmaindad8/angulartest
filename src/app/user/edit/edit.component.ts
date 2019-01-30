@@ -10,8 +10,12 @@ import { ApiService } from '../../api.service';
 })
 export class EditComponent implements OnInit {
   user: any;
-  cities = ['Mumbai', 'Pune', 'Thane'];
-  skills = ['C#', '.net', 'Angularjs', 'Reactjs'];
+  // cities = ['Mumbai', 'Pune', 'Thane'];
+  // skills = ['C#', '.net', 'Angularjs', 'Reactjs'];
+  cityData: any;
+  cities = [];
+  skillData: any;
+  skills = [];
   userSelectedSkills = [];
   formData = new FormData();
   fileUpload: File = null;
@@ -28,6 +32,31 @@ export class EditComponent implements OnInit {
     }
    
   });
+
+  this.apiservice
+  .getCities()
+  .subscribe((data) => {
+    console.log(data)
+    this.cityData = data;
+    this.cities = this.cityData && this.cityData.map((ele) => {
+      return ele.name;
+    });
+    console.log(this.cities)
+  });
+
+this.apiservice
+  .getSkills()
+  .subscribe((data) => {
+    console.log(data)
+    this.skillData = data;
+    this.skills = this.skillData && this.skillData.map((ele) => {
+      return ele.name;
+    });
+    console.log(this.skills)
+  });
+
+
+
 
   }
 
