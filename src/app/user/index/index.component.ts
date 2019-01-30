@@ -27,19 +27,23 @@ export class IndexComponent implements OnInit {
     this.router.navigate(['/user/add']);
   }
   deleteUser(id){
-    this.apiservice.deleteUser(id)
-    .subscribe(res => {
-      this.apiservice
-      .getUsers()
-      .subscribe((data: User[]) => {
-        console.log(data)
-      this.users = data;
-      
-    });
-      }, (err) => {
-        console.log(err);
-      }
-    );
+    var result = confirm("Confirm to delete this user?");
+if (result) {
+  this.apiservice.deleteUser(id)
+  .subscribe(res => {
+    this.apiservice
+    .getUsers()
+    .subscribe((data: User[]) => {
+      console.log(data)
+    this.users = data;
+    
+  });
+    }, (err) => {
+      console.log(err);
+    }
+  );
+}
+    
   }
 
 }

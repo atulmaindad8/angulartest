@@ -9,6 +9,7 @@ import { EditComponent } from './user/edit/edit.component';
 import { IndexComponent } from './user/index/index.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailComponent } from './user/detail/detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -16,8 +17,12 @@ const routes: Routes = [
     component: CreateComponent
   },
   {
-    path: 'edit/:id',
+    path: 'user/:email',
     component: EditComponent
+  },
+  {
+    path: 'details/:email',
+    component: DetailComponent
   },
   {
     path: '',
@@ -27,6 +32,7 @@ const routes: Routes = [
     path: 'users',
     component: IndexComponent
   }
+
 ];
 
 @NgModule({
@@ -42,6 +48,7 @@ const routes: Routes = [
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

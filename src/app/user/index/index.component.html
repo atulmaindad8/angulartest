@@ -13,14 +13,14 @@
     </thead>
     <tbody>
     <tr *ngFor="let user of users">
-        <td><img class="profile_pic"  [src]="user.pictureUrl!= null ? user.pictureUrl : defaultPicUrl"></td>
+        <td><img class="profile_pic"  [src]="user.profileurl!= null ? user.profileurl : defaultPicUrl"></td>
       <td>{{user.name}}</td>
       <td>{{user.surname}}</td>
       <td>{{user.email}}</td>
       <td>{{user.skills}}</td>
       <td>
-        <button class="btn btn-primary"  > Edit</button>
-        <button class="btn btn-default"  style="margin-left: 20px;">View</button>
+        <button class="btn btn-primary" [routerLink]="['/user', user.email]" > Edit</button>
+        <button class="btn btn-default" [routerLink]="['/details', user.email]" style="margin-left: 20px;">View</button>
         <button class="btn btn-danger" (click)="deleteUser(user._id)" style="margin-left: 20px;"> Delete</button>
       </td>
     </tr>

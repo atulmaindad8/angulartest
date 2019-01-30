@@ -7,5 +7,5 @@ export class User {
     skills: string;
     gender: string;
     city: string;
-    pictureUrl:string;
+    profileurl:string;
   }

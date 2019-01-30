@@ -10,10 +10,11 @@
       <h3>User Details</h3>
       <div class="card">
         <div class="card-body">
-          <form  (ngSubmit)="onSubmit(createUser)">
+          <form   (ngSubmit)="onSubmit(createUser)">
             <div class="form-group">
               <label class="col-md-4">Name</label>
               <input type="text" [(ngModel)]="user.name" class="form-control" name="name" required/>
+              
             </div>
             <div class="form-group">
               <label class="col-md-4">Surname</label>
@@ -22,7 +23,8 @@
               <div class="form-group">
                 <label class="col-md-4">Email</label>
                 <input type="email"  [(ngModel)]="user.email" class="form-control" name="email" required/>
-                </div>
+                
+              </div>
                 <div class="form-group">
                   <p>Gender:</p>
                     <label class="radio-inline">
@@ -33,14 +35,14 @@
                       </label>
                 </div>
                 <div class="form-group">
-                    <p>City</p>
+                    <p>City  <button type="button" title="Add City" class="btn btn-primary" data-toggle="modal" data-target="#cityModal">+</button></p> 
                     <select [(ngModel)]="user.city" id="city" name="city" class="form-control">
                         <option value="" disabled selected>select city</option>
                         <option *ngFor="let item of cities" [value]="item">{{item}}</option>
                       </select>
                   </div>
                   <div class="form-group">
-                      <p>Skills</p>
+                      <p>Skills <button type="button" title="Add Skill" class="btn btn-primary" data-toggle="modal" data-target="#skillModal">+</button></p>  
                       <div class="form-check" *ngFor="let item of skills">
                           <input class="form-check-input" name="{{ item }}" (click)="checkboxClick($event)" type="checkbox" id="{{item}}" value="{{ item }}">
                           <label class="form-check-label" for="{{item}}">
@@ -48,13 +50,13 @@
                           </label>
                       </div>
                     </div>
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <p>Profile Picture</p>
                         <label for="file">Choose File</label>
-                        <input type="file"
+                        <input #image type="file"
                                id="file"
-                               (change)="handleFileInput($event.target.files)">
-                    </div> -->
+                               (change)="handleFileInput(image)">
+                    </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Create</button>
                 <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
@@ -64,4 +66,33 @@
       </div>
     </div>
   </div>
+</div>
+
+<div id="cityModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header hh">
+        <h4 class="modal-title">Add City</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">       
+        <input #newCity type="text" value=""/>&nbsp;
+        <button type="button" class="btn btn-primary" (click)="onClickAddCity(newCity)" data-dismiss="modal">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="skillModal" class="modal fade" role="dialog">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header hh">
+      <h4 class="modal-title">Add Skill</h4>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <div class="modal-body">       
+      <input #newSkill type="text" value=""/>&nbsp;
+      <button type="button" class="btn btn-primary" (click)="onClickAddSkill(newSkill)" data-dismiss="modal">Add</button>
+    </div>
+  </div>
+</div>
 </div>

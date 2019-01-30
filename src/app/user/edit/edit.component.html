@@ -1,3 +1,68 @@
-<p>
-  edit works!
-</p>
+
+<div class="container">
+  <!-- <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Create User</a></li>
+    <li><a data-toggle="tab" href="#menu1">Upload Profile Picture</a></li>
+  </ul> -->
+
+  <div class="tab-content">
+    <div id="home" class="">
+      <h3>User Details</h3>
+      <div class="card">
+        <div class="card-body">
+          <form  (ngSubmit)="onSubmit(createUser)">
+            <div class="form-group">
+              <label class="col-md-4">Name</label>
+              <input type="text" [(ngModel)]="user.name" class="form-control" name="name" required/>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4">Surname</label>
+              <input type="text" [(ngModel)]="user.surname" class="form-control" name="surname" />
+              </div>
+              <div class="form-group">
+                <label class="col-md-4">Email</label>
+                <input type="email" disabled [(ngModel)]="user.email" class="form-control" name="email" required/>
+                </div>
+                <div class="form-group">
+                  <p>Gender:</p>
+                    <label class="radio-inline">
+                        <input type="radio" name="gender" value="male" [(ngModel)]="user.gender" checked>Male
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" name="gender" value="female" [(ngModel)]="user.gender">Female
+                      </label>
+                </div>
+                <div class="form-group">
+                    <p>City</p>
+                    <select [(ngModel)]="user.city" id="city" name="city" class="form-control">
+                        <option value="" disabled selected>select city</option>
+                        <option *ngFor="let item of cities" [value]="item">{{item}}</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <p>Skills</p>
+                      <div class="form-check" *ngFor="let item of skills">
+                          <input class="form-check-input" name="{{ item }}" (click)="checkboxClick($event)" type="checkbox" [checked]="userSelectedSkills.indexOf(item) > -1" id="{{item}}" value="{{ item }}">
+                          <label class="form-check-label" for="{{item}}">
+                              {{item}}
+                          </label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <p>Profile Picture</p>
+                        <label for="file">Choose File</label>
+                        <input #image type="file"
+                        id="file"
+                        (change)="handleFileInput(image)">
+                        <img class="profile_pic"  [src]="user.profileurl!= null ? user.profileurl : ''">
+                    </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-default" [routerLink]="['/']">Cancel</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
